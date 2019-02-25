@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			body
+			{
+				background-color: silver;
+			}
+
+			div
+			{
+				background-color: darkgray;
+				display: block;
+				width: 75%;
+				margin: auto;
+				font-family: Verdana;
+				font-size: 105%;
+			}
+
+			div.spis_tresci
+			{
+				background-color: dimgray;
+				border-style: ridge;
+				border-width: 4px;
+			}
+
+			table
+			{
+				border-collapse: collapse;
+				background-color: gainsboro;
+			}
+
+			th
+			{
+				background-color: lightsteelblue;
+				border: 2px solid black;
+				padding: 15px;
+			}
+
+			td
+			{
+				border: 2px solid black;
+				padding: 15px;
+			}
+
+			tr:nth-child(even)
+			{
+				background-color: lightgray;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="spis_tresci">
+			<p>Spis treści:</p>
+			<ul>
+				<li><a href="#linki">1. Hiperłącze do strony głównej UWB</a></li>
+				<li><a href="#plan">2. Plan zajęć</a>
+					<ul>
+						<li><a href="#imie">Imię</a></li>
+						<li><a href="#nazwisko">Nazwisko</a></li>
+						<li><a href="#plec">Płeć</a></li>
+						<li><a href="#kraj">Kraj</a></li>
+						<li><a href="#jezyk">Język</a></li>
+					</ul>
+				</li>
+				<li><a href="#formularz">3. Formularz</a></li>
+			</ul>
+		</div>
+
+		<div id="linki">
+			<a href="http://uwb.edu.pl/">
+			<img src="http://ii.uwb.edu.pl/newii/images/uwb_logo_120.png">
+			Strona główna UWB
+			</a>
+		</div>
+
+		<div>
+				<p style="text-align: left;"><i>Look at them</i>, they come to this place when they know they are not pure. Tenno use the keys, but they are mere trespassers. Only I, Vor, know the true power of the Void. I was cut in half, destroyed, but through it's Janus Key, the Void called to me. It brought me here and here I was reborn.</p>
+				<p style="text-align: center;">We cannot blame these creatures, they are being led by a false prophet, <b>an impostor</b> who knows not the secrets of the Void.</p>
+				<p style="text-align: right;">Behold the Tenno, <u>come to scavenge and desecrate this sacred realm.</u> My brothers, did I not tell of this day? Did I not prophesize this moment? Now, I will stop them. Now I am changed, reborn through the energy of the Janus Key. Forever bound to the Void.</p>
+				<p style="text-align: justify;">Let it be known, if the Tenno want true salvation, they will lay down their arms, and wait for the baptism of my Janus key. It is time. I will teach these trespassers the redemptive power of my Janus key. They will learn it's simple truth. The Tenno are lost, and they will resist. But I, Vor, will cleanse this place of their impurity.</p>
+		</div>
+
+		<div id="plan">
+			<table>
+				<tr>
+					<th></th>
+					<th>Poniedziałek</th>
+					<th>Wtorek</th>
+					<th>Środa</th>
+					<th>Czwartek</th>
+					<th>Piątek</th>
+				</tr>
+				<tr>
+					<td>8:15</td>
+					<td>Metody obliczeniowe</td>
+					<td>Programowanie w internecie</td>
+					<td>Technologie sieciowe</td>
+					<td></td>
+					<td>Programowanie w środowiskach graficznych</td>
+				</tr>
+				<tr>
+					<td>10:15</td>
+					<td>Metody probabilistyczne i statystyka</td>
+					<td>Programowanie w internecie</td>
+					<td>Język angielski</td>
+					<td>Inżynieria oprogramowania</td>
+					<td>Grafika i komunikacja człowiek-komputer</td>
+				</tr>
+				<tr>
+					<td>12:15</td>
+					<td>Metody probabilistyczne i statystyka</td>
+					<td>Metody obliczeniowe</td>
+					<td>Grafika i komunikacja człowiek-komputer</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>14:15</td>
+					<td>Technologie sieciowe</td>
+					<td></td>
+					<td></td>
+					<td>Metody probabilistyczne i statystyka</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>16:15</td>
+					<td>Programowanie w środowiskach graficznych</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+
+		<div id="formularz">
+			<form>
+				<p id="imie">Imię: <input type="text" name="imie"></p>
+				<p id="nazwisko">Nazwisko: <input type="text" name="nazwisko"></p>
+				<p id="adres">Adres: <br />
+					<textarea name="Text1" cols="40" rows="5"></textarea>
+				</p>
+				<p id="plec">Płeć: <br />
+				<input type="radio" name="plec" value="f"> Kobieta<br />
+				<input type="radio" name="plec" value="m"> Mężczyzna<br />
+				<input type="radio" name="plec" value="o"> Inna<br />
+				</p>
+				<p id="kraj">Kraj: <br />
+				<select name="kraj">
+					<option value="pl">Polska</option>
+					<option value="nz">Nowa Zelandia</option>
+				</select></p>
+				<p id="jezyk">Język programowania:<br />
+				<input type="checkbox" value="ada">Ada<br />
+				<input type="checkbox" value="cpp">C++<br />
+				<input type="checkbox" value="lua">Lua<br />
+				<input type="checkbox" value="lc">LOLCODE<br />
+				</p>
+			</form>
+		</div>
+	</body>
+</html>
