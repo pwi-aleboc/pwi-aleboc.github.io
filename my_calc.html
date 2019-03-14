@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript">
+
+            var tmpl_varStorageHTML = "";
+
+            var savedVars = new Map();
+            var currentExpr;
+            var result = 0;
+
+            function storeVariable(name, value) 
+            {
+                savedVars.set(name, {'val' : value, 'nodeId' : "_varStorageNode_" + name});
+            }
+
+            function removeStoredVariable(name)
+            {
+                savedVars.delete(name);
+            }
+
+            function getStoredVariableValue(name)
+            {
+                return savedVars.get(name).val;
+            }
+
+            function getStoredVariableNodeId(name)
+            {
+                return savedVars,get(name).nodeId;
+            }
+
+            function appendToExpr(str)
+            {
+                currentExpr += str;
+            }
+
+            function updateResult()
+            {
+                result = eval(currentExpr);
+                document.getElementById("resultField").innerText = result.toString();
+                //currentExpr = "";
+                //appendToExpr(result.toString());
+            }
+
+            function addVariableStorage(name, value)
+            {
+                var template = document.createElement("template");
+                template.innerHTML = tmpl_varStorageHTML.trim();
+                storeVariable(name, value);
+                document.getElementById("variableContainer").appendChild(template.content.firstChild);
+            }
+
+            function removeVariableStorage(name)
+            {
+                document.getElementById("variableContainer").removeChild(getStoredVariableNodeId(name));
+                removeStoredVariable(name);
+            }
+
+            window.onload = function()
+            {
+                document.getElementById("plusButton").addEventListener("click", function() { appendToExpr("+") }, false);
+                document.getElementById("resultButton").addEventListener("click", function() { updateResult() }, false);
+                document.getElementById("numButton_1").addEventListener("click", function() { appendToExpr("1") }, false);
+            }
+            
+        </script>
+    </head>
+    <body>
+        <div id="resultField">
+
+        </div>
+        <div id="inputField">
+
+        </div>
+
+        <input type="button" id="plusButton" value="+">
+        <input type="button" id="resultButton" value="=">
+
+        <input type="button" id="numButton_1" value="1">
+
+        <div id="variableContainer">
+
+        </div>
+
+    </body>
+</html>
