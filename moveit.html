@@ -5,27 +5,29 @@
             var objCat;
             var objBox;
             var catSpeed = 2;
-
             function moveCat(x, y) {
                 var newPos = parseFloat(objCat.style.left) + x;
                 if(newPos >= 0 && newPos <= 92)
                     objCat.style.left = newPos + "%";
-
                 newPos = parseFloat(objCat.style.top) + y;
                 if(newPos >= 0 && newPos <= 92)
                     objCat.style.top = newPos + "%";
                 
                 checkGoal();
             }
-
             function checkGoal() {
                 var catRect = objCat.getBoundingClientRect();
                 var boxRect = objBox.getBoundingClientRect();
-
                 if(catRect.top > boxRect.top && catRect.bottom < boxRect.bottom && catRect.left > boxRect.left && catRect.right < boxRect.right)
-                    alert("Miau.");
+                {
+					//alert("Miau.");
+					document.getElementById("catText").style.display = "block";
+				}
+				else
+				{
+					document.getElementById("catText").style.display = "none";
+				}
             }
-
             window.onload = function() {
                 objCat = document.getElementById("objCat");
                 objBox = document.getElementById("objBox");
@@ -33,7 +35,6 @@
                 objCat.style.left = Math.random() * 92 + "%";
                 objBox.style.top = Math.random() * 84 + "%";
                 objBox.style.left = Math.random() * 84 + "%";
-
                 document.getElementById("buttonLeft").addEventListener("click", function() { moveCat(-catSpeed, 0) }, false);
                 document.getElementById("buttonRight").addEventListener("click", function() { moveCat(catSpeed, 0) }, false);
                 document.getElementById("buttonUp").addEventListener("click", function() { moveCat(0, -catSpeed) }, false);
@@ -43,8 +44,11 @@
     </head>
     <body>
         <div style="width: 75vh; height: 75vh; background-color: darkgray; margin: auto; position: relative;">
-            <img id="objBox" src="media/box.png" style="width: 16%; height: 16%; position: absolute;">
-            <img id="objCat" src="media/cat.png" style="width: 8%; height: 8%; position: absolute;">
+			<img id="objBox" src="media/box.png" style="width: 16%; height: 16%; position: absolute;">
+			<div id="objCat" style="width: 8%; height: 8%; position: absolute;">
+				<img src="media/cat.png" style="width: 100%; height: 100%; position: absolute;">
+				<div id="catText" style="font-family: Verdana; position: absolute; left: 50%; bottom: 0px; transform: translate(-50%, 0%); display: none;"><strong>MIAU.</strong></div>
+			</div>
         </div>
         <div style="width: 75vh; text-align: center; background-color: darkgray; margin: auto;">
             <p><input id="buttonUp" type="button" value="UP"></p>
