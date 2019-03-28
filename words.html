@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .boardField
+            {
+                width: 40px;
+                height: 40px;
+                margin: 0px 0px 0px -4px;
+                padding: 0px;
+            }
+
+            input[type=text].boardField, textarea
+            {
+                background-color: bisque;
+                text-transform: uppercase;
+                border: 1px solid;
+                border-color: dimgray;
+                width: 38px;
+                height: 38px;
+            }
+
+            input[type=text].boardField:disabled, textarea
+            {
+                background-color: beige;
+                border: 1px solid;
+            }
+
+            .board 
+            {
+                white-space: nowrap;
+            }
+        </style>
+        <script type="text/javascript">
+
+
+            function createBoard(sizeX, sizeY)
+            {
+                var template = document.querySelector("#tmpl_boardField");
+                var board = document.getElementById("board");
+
+                var x;
+                var y;
+                for(y = 0; y < sizeY; ++y)
+                {
+                    for(x = 0; x < sizeX; ++x)
+                    {
+                        var field = document.importNode(template.content, true);
+                        //field.setAttribute("id", "field_" + y + "_" + x);
+                        board.appendChild(field);
+                    }
+
+                    board.appendChild(document.createElement("br"));
+                }
+            }
+
+
+            function insertWord(word, startX, startY, horizontal)
+            {
+                for(var i = 0; i < word.length; ++i)
+                {
+                    var field = document.getElementById("field_" + (startY + horizontal ? 0 : i) + "_" + (startX + horizontal ? i : 0));
+                    field.disabled = false;
+                    field.dataset.answer = word.charAt(i);
+                }
+            }
+
+
+            window.onload = function()
+            {
+                createBoard(16, 16);
+                //insertWord("TEST", 4, 2, false);
+            }
+
+        </script>
+    </head>
+    <body>
+        <template id="tmpl_boardField">
+            <input type="text" class="boardField" pattern="[A-Za-z]{1}" data-answer="" disabled>
+        </template>
+        <div id="board" class="board">
+
+        </div>
+    </body>
+</html>
