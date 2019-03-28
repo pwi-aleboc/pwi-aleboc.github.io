@@ -6,8 +6,10 @@
             {
                 width: 40px;
                 height: 40px;
-                margin: 0px 0px 0px -4px;
+                margin: -1px 0px 0px -1px;
                 padding: 0px;
+				border-collapse: collapse;
+				text-align: center;
             }
 
             input[type=text].boardField, textarea
@@ -23,63 +25,228 @@
             input[type=text].boardField:disabled, textarea
             {
                 background-color: beige;
-                border: 1px solid;
+                border: 0px;
+				opacity: 0.0;
+				width: 40px;
+                height: 40px;
             }
 
             .board 
             {
                 white-space: nowrap;
+				margin: auto;
+				text-align: center;
+				border: 2px solid;
+				font-family: Verdana, Geneva, Tahoma, sans-serif;
             }
-        </style>
-        <script type="text/javascript">
 
+			.questionArea
+			{
+				float: right;
+				width: 20%;
+				position: fixed;
+				height: 100%;
+				top: 0;
+				right: 0;
+				z-index: 1;
+				background-color: burlywood;
+				overflow: auto;
+
+				font-size: 16px;
+				font-family: Verdana, Geneva, Tahoma, sans-serif;
+			}
+
+			.main
+			{
+				margin-right: 20%;
+				padding: 10px;
+			}
+
+			button.buttonCheck
+			{
+				width: 20%;
+				height: 10%;
+				display: block;
+				font-size: 20px;
+				margin: auto;
+			}
+
+			.questionList
+			{
+				padding: 10px;
+			}
+
+			.questionList li
+			{
+				margin-left: 20px;
+				padding-top: 5px;
+			}
+        </style>
+		<script type="text/javascript">
+			var boardSizeX;
+			var boardSizeY;
+			var dirHorizontal;
+
+			function onFieldKeyPress(event, posX, posY, horizontal)
+			{
+				var key = event.keyCode;
+				horizontal = dirHorizontal;
+
+				var field;
+				if(key == 8)
+				{
+					field = document.getElementById("field_" + (posY - (horizontal ? 0 : 1)) + "_" + (posX - (horizontal ? 1 : 0)));
+				}
+				else if(key >= 65 && key <= 90)
+				{
+					field = document.getElementById("field_" + (posY + (horizontal ? 0 : 1)) + "_" + (posX + (horizontal ? 1 : 0)));
+				}
+
+				field.focus();
+				field.select();
+			}
+
+			function toggleDirection()
+			{
+				dirHorizontal = !dirHorizontal;
+			}
 
             function createBoard(sizeX, sizeY)
             {
+				boardSizeX = sizeX;
+				boardSizeY = sizeY;
+				dirHorizontal = true;
+
                 var template = document.querySelector("#tmpl_boardField");
                 var board = document.getElementById("board");
-
                 var x;
                 var y;
                 for(y = 0; y < sizeY; ++y)
                 {
                     for(x = 0; x < sizeX; ++x)
                     {
-                        var field = document.importNode(template.content, true);
-                        //field.setAttribute("id", "field_" + y + "_" + x);
+                        var field = document.importNode(template.content, true).firstElementChild;
                         board.appendChild(field);
+						field.id = "field_" + y + "_" + x;
                     }
 
                     board.appendChild(document.createElement("br"));
                 }
             }
 
-
-            function insertWord(word, startX, startY, horizontal)
+            function insertWord(word, startX, startY, horizontal, questionText)
             {
                 for(var i = 0; i < word.length; ++i)
                 {
-                    var field = document.getElementById("field_" + (startY + horizontal ? 0 : i) + "_" + (startX + horizontal ? i : 0));
-                    field.disabled = false;
-                    field.dataset.answer = word.charAt(i);
+                    var field = document.getElementById("field_" + (startY + (horizontal ? 0 : i)) + "_" + (startX + (horizontal ? i : 0)));
+
+					if(!field.disabled)
+					{
+						field.onclick = function() { toggleDirection(); this.select(); };
+					}
+					else
+					{
+                    	field.disabled = false;
+						field.dataset.answer = word.charAt(i);
+						field.onclick = function() { dirHorizontal = horizontal; this.select(); };
+					}
+
+					var createOnKeyPressFunction = function(x, y, horizontal)
+					{
+						return function(event)
+						{
+							setTimeout(() => {
+								onFieldKeyPress(event, x, y, horizontal);
+							}, 0);
+						}
+					}
+
+					field.onkeydown = createOnKeyPressFunction(startX + (horizontal ? i : 0), startY + (horizontal ? 0 : i), horizontal);
                 }
+
+				var questionList = document.getElementById(horizontal ? "questionListHorizontal" : "questionListVertical");
+				var elem = document.createElement("li");
+				elem.appendChild(document.createTextNode(questionText));
+				questionList.appendChild(elem);
             }
 
+			function checkWords()
+			{
+				var fields = document.getElementsByClassName("boardField");
+				var mistakes = 0;
+				var unfilled = 0;
+
+				for(var i = 0; i < fields.length; ++i)
+				{
+					if(fields[i].disabled)
+					{
+						continue;
+					}
+
+					if(fields[i].value == "")
+					{
+						++unfilled;
+						fields[i].style.backgroundColor = "bisque";
+					}
+					else if(fields[i].value.toUpperCase() != fields[i].dataset.answer)
+					{
+						++mistakes;
+						fields[i].style.backgroundColor = "brown";
+					}
+					else
+					{
+						fields[i].style.backgroundColor = "bisque";
+					}
+				}
+
+				if(unfilled == 0 && mistakes == 0)
+				{
+					alert("//TODO: Dodać fajerwerki");
+				}
+			}
+
+
+			function createWarframeCrossword()
+			{
+				createBoard(11, 11);
+				insertWord("WAR", 5, 0, false, "Stalker's sword");
+				insertWord("HUNHOW", 10, 0, false, "Father of the Lotus");
+				insertWord("REBECCA", 3, 1, false, "... Ford, Spacemom");
+				insertWord("CONTINUITY", 7, 1, false, "Process the Orokin used to prolong their lives");
+				insertWord("LISET", 5, 6, false, "Basic Tenno landing craft");
+				insertWord("FORMA", 1, 1, true, "Used for polarizing equipment");
+				insertWord("PURE", 0, 4, true, "Look at them, they come to this place when they know they are not...");
+				insertWord("POTATO", 5, 4, true, "A common name for Orokin Reactor");
+				insertWord("EXCALIBUR", 0, 7, true, "... was the first");
+				insertWord("SENTIENT", 0, 9, true, "The race Lotus belongs to");
+			}
 
             window.onload = function()
             {
-                createBoard(16, 16);
-                //insertWord("TEST", 4, 2, false);
-            }
+				createWarframeCrossword();
 
+				document.getElementById("button_check").addEventListener("click", checkWords, false);
+            }
         </script>
     </head>
     <body>
         <template id="tmpl_boardField">
-            <input type="text" class="boardField" pattern="[A-Za-z]{1}" data-answer="" disabled>
-        </template>
-        <div id="board" class="board">
-
-        </div>
+            <input type="text" class="boardField" maxlength="1" data-answer="" disabled>
+		</template>
+		<div>
+			<div class="questionArea">
+				<ol id="questionListVertical" class="questionList"><strong>Pionowo</strong>
+				</ol>
+				<ol id="questionListHorizontal" class="questionList"><strong>Poziomo</strong>
+				</ol>
+			</div>
+			<div class="main">
+				<div id="board" class="board">
+				</div>
+				<div style="text-align: center;">
+					<button id="button_check" class="buttonCheck" type="button">Sprawdź</button>
+				</div>
+			</div>
+		</div>
     </body>
 </html>
