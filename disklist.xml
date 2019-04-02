@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE disklist SYSTEM "disklist.dtd">
+
+<disklist>
+    <dvd_video>
+        <title>Stargate: The Ark of Truth</title>
+        <year>2008</year>
+        <type audience="adults" />
+    </dvd_video>
+    <dvd_video>
+        <title>Stargate: Continuum</title>
+        <year>2009</year>
+        <type audience="adults" />
+    </dvd_video>
+    <dvd_audio>
+        <title>A Day Without Rain</title>
+        <author>Enya</author>
+        <year>2000</year>
+        <duration>48:35</duration>
+        <track id="1">
+            <title>A Day Without Rain</title>
+            <duration>2:38</duration>
+        </track>
+        <track id="2">
+            <title>Wild Child</title>
+            <duration>3:47</duration>
+        </track>
+        <track id="3">
+            <title>Only Time</title>
+            <duration>3:38</duration>
+        </track>
+        <track id="4">
+            <title>Tempus Vernum</title>
+            <duration>2:24</duration>
+        </track>
+        <track id="5">
+            <title>Deora ar Mo Chroi</title>
+            <duration>2:48</duration>
+        </track>
+        <track id="6">
+            <title>Flora's Secret</title>
+            <duration>4:07</duration>
+        </track>
+        <track id="7">
+            <title>Fallen Embers</title>
+            <duration>2:31</duration>
+        </track>
+        <track id="8">
+            <title>Silver Inches</title>
+            <duration>1:37</duration>
+        </track>
+        <track id="9">
+            <title>Pilgrim</title>
+            <duration>3:12</duration>
+        </track>
+        <track id="10">
+            <title>One by One</title>
+            <duration>3:56</duration>
+        </track>
+        <track id="11">
+            <title>The First of Autumn</title>
+            <duration>3:10</duration>
+        </track>
+        <track id="12">
+            <title>Lazy Days</title>
+            <duration>3:42</duration>
+        </track>
+    </dvd_audio>
+</disklist>

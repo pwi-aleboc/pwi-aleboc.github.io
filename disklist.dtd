@@ -1,0 +1,20 @@
+
+<!ELEMENT disklist (dvd_video|dvd_audio)*>
+<!ATTLIST disklist name CDATA "">
+
+<!ELEMENT dvd_video (title, year, type?)>
+
+<!ELEMENT title (#CDATA)>
+<!ELEMENT year (#CDATA)>
+<!ELEMENT type EMPTY>
+<!ATTLIST type audience ("children"|"adults")>
+
+<!ELEMENT dvd_audio (title, author?, year?, duration, country?, genre?, track*)>
+
+<!ELEMENT author (#CDATA)>
+<!ELEMENT duration (#CDATA)>
+<!ELEMENT country (#CDATA)>
+<!ELEMENT genre (#CDATA)>
+
+<!ELEMENT track (title, author?, duration, country?, genre?)>
+<!ATTLIST track id>
