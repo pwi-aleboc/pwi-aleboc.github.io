@@ -66,4 +66,63 @@
             <duration>3:42</duration>
         </track>
     </dvd_audio>
+	<dvd_audio>
+        <title>Amarantine</title>
+        <author>Enya</author>
+        <year>2005</year>
+        <duration>45:00</duration>
+        <track id="1">
+            <title>Less Than a Pear</title>
+            <duration>3:44</duration>
+        </track>
+        <track id="2">
+            <title>Amarantine</title>
+            <duration>3:13</duration>
+        </track>
+        <track id="3">
+            <title>It's in the Rain</title>
+            <duration>4:08</duration>
+        </track>
+        <track id="4">
+            <title>If I Could Be Where You Are</title>
+            <duration>4:01</duration>
+        </track>
+        <track id="5">
+            <title>The River Sings</title>
+            <duration>2:49</duration>
+        </track>
+        <track id="6">
+            <title>Long Long Yourney</title>
+            <duration>3:17</duration>
+        </track>
+        <track id="7">
+            <title>Sumiregusa</title>
+            <duration>4:42</duration>
+        </track>
+        <track id="8">
+            <title>Someone Said Goodbye</title>
+            <duration>4:02</duration>
+        </track>
+        <track id="9">
+            <title>A Moment Lost</title>
+            <duration>3:08</duration>
+        </track>
+        <track id="10">
+            <title>Drifting</title>
+            <duration>4:12</duration>
+        </track>
+        <track id="11">
+            <title>Amidst the Falling Snow</title>
+            <duration>3:38</duration>
+        </track>
+        <track id="12">
+            <title>Water Shows the Hidden Heart</title>
+            <duration>4:39</duration>
+        </track>
+    </dvd_audio>
+	<dvd_video>
+        <title>Stargate</title>
+        <year>1994</year>
+        <type audience="adults" />
+    </dvd_video>
 </disklist>
