@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            @font-face {
+                font-family: "Chess";
+                src: url("CHEQ_TT.ttf") format("truetype");
+            }
+
+            
+            table.board 
+            {
+                border-collapse: collapse;
+                margin: auto;
+            }
+
+            .board tr td
+            {
+                background-color: black;
+                color: white;
+                width: 40px;
+                height: 40px;
+                margin: 0;
+                padding: 0;
+                font-family: "Chess";
+            }
+
+            .board tr:nth-child(even) td:nth-child(odd), 
+            tr:nth-child(odd) td:nth-child(even)
+            {
+                background-color: white;
+                color: black;
+            }
+        </style>
+        <script>
+            function isFieldWhite(x, y)
+            {
+                if(x%2 == 0 && y%2 == 0 || x%2 == 1 && y%2 == 1)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+
+            function createBoard(sizeX, sizeY)
+            {
+                var board = document.getElementById("board");
+
+                var x;
+                var y;
+                for(y = 0; y < sizeY; ++y)
+                {
+                    var row = document.createElement("tr");
+                    board.appendChild(row);
+                    for(x = 0; x < sizeX; ++x)
+                    {
+                        var field = document.createElement("td");
+                        row.appendChild(field);
+                        field.id = "field_" + y + "_" + x;
+                        field.appendChild(document.createElement("p"));
+                    }
+                }
+            }
+
+            function placePiece(piece, color, posX, posY)
+            {
+                var field = document.getElementById("field" + posY + "_" + posX);
+
+                var piececode;
+                switch(piece){
+                case "bishop":
+                    if(isFieldWhite(posX, posY))
+                    {
+                        piececode = color == "white" ? "b" : "n";
+                    }
+                    else
+                    {
+                        piececode = color == "white" ? "n" : "b";
+                    }
+                    break;
+
+                case "knight":
+                    if(isFieldWhite(posX, posY))
+                    {
+                        piececode = color == "white" ? "h" : "j";
+                    }
+                    else
+                    {
+                        piececode = color == "white" ? "j" : "h";
+                    }
+                    break;
+
+                case "rook":
+                    if(isFieldWhite(posX, posY))
+                    {
+                        piececode = color == "white" ? "r" : "t";
+                    }
+                    else
+                    {
+                        piececode = color == "white" ? "t" : "r";
+                    }
+                    break;
+
+                case "queen":
+                    if(isFieldWhite(posX, posY))
+                    {
+                        piececode = color == "white" ? "k" : "l";
+                    }
+                    else
+                    {
+                        piececode = color == "white" ? "l" : "k";
+                    }
+                    break;
+
+                case "king":
+                    if(isFieldWhite(posX, posY))
+                    {
+                        piececode = color == "white" ? "q" : "w";
+                    }
+                    else
+                    {
+                        piececode = color == "white" ? "w" : "q";
+                    }
+                    break;
+
+                case "pawn":
+                    if(isFieldWhite(posX, posY))
+                    {
+                        piececode = color == "white" ? "p" : "o";
+                    }
+                    else
+                    {
+                        piececode = color == "white" ? "o" : "p";
+                    }
+                    break;
+                }
+                
+
+                field.firstElementChild().innerText = piececode;
+            }
+
+            function loadBoard(xmlpath)
+            {
+                doc = document.implementation.createDocument( "", "", null );
+                doc.load( xmlpath );
+
+                var board = document.getElementById("board");
+                var cNode = board.cloneNode(false);
+                board.parentNode.replaceChild(cNode ,board);
+
+
+            }
+        </script>
+    </head>
+    <body>
+        <div>
+            <table id="board" class="board"></table>
+        </div>
+        <div>
+
+        </div>
+    </body>
+</html>
