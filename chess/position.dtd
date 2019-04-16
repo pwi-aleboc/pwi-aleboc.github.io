@@ -1,0 +1,8 @@
+
+<!ELEMENT board (sizeX, sizeY, piece*)>
+<!ELEMENT piece (color, posX, posY)>
+<!ELEMENT sizeX #PCDATA>
+<!ELEMENT sizeY #PCDATA>
+<!ELEMENT color #PCDATA>
+<!ELEMENT posX #PCDATA>
+<!ELEMENT posY #PCDATA>
