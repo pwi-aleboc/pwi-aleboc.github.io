@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        .sidebar
+        {
+            float: left;
+            width: 20%;
+            position: fixed;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            background-color: burlywood;
+            overflow: auto;
+            font-size: 16px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .main
+        {
+            margin-left: 20%;
+            padding: 10px;
+        }
+
+        .buttoncolumn button
+        {
+            display: block;
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            width: 100%;
+        }
+    </style>
+    <script type = "text/javascript" language = "JavaScript">
+        var asyncRequest;
+ 
+        function getContent( url )
+        {
+            try
+            {
+                asyncRequest = new XMLHttpRequest();
+ 
+                asyncRequest.onreadystatechange = stateChange; 
+                asyncRequest.open( 'GET', url, true );
+                asyncRequest.send( null );
+            }
+            catch ( exception )
+            {
+                alert( 'Request failed.' );
+            }
+        }
+       
+        function stateChange()
+        {
+            if ( asyncRequest.readyState == 4 && asyncRequest.status == 200 )
+            {
+                var doc = document.getElementById('contentArea').contentDocument;
+                doc.open();
+                doc.write(asyncRequest.responseText);
+                doc.close();
+            }
+        }
+ 
+        function clearContent()
+        {
+            var doc = document.getElementById('contentArea').contentDocument;
+            doc.open();
+            doc.close();
+        }
+
+
+        function updateContent(btnval)
+        {
+            clearContent();
+            getContent(btnval);
+        }
+    </script>
+ </head>
+ <body>
+    <div class="sidebar">
+        <div class="buttoncolumn">
+            <button value="http://pwi-aleboc.github.io/chessboard1.html" onclick="updateContent(value)">chessboard1</button>
+            <button value="http://pwi-aleboc.github.io/words.html" onclick="updateContent(value)">words</button>
+        </div>
+    </div>
+    <div class="main">
+        <iframe id="contentArea" width="90%" height="600px"></iframe>
+    </div>
+ </body>
+ </html>
