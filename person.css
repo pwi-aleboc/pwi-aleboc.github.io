@@ -1,0 +1,35 @@
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px;
+    background-color: rgb(221, 221, 221);
+}
+
+h1 {
+    font-size: 20px;
+    text-align: left;
+    padding-left: 16px;
+    font-weight: bold;
+}
+
+.content {
+    margin: 4px;
+    overflow: auto;
+    height: 100%;
+    display: flex;
+}
+
+.text {
+    display: inline-block;
+}
+
+.sidebar {
+    float: right;
+    display: inline-block;
+    width: 25%;
+    margin: 10px;
+}
+
+.sidebar img {
+    object-fit: contain;
+}
